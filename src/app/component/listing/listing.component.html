@@ -1,0 +1,66 @@
+<div class="container my-4">
+    <div class="card shadow-lg border-0 rounded-4">
+        <div class="card-header bg-primary text-white d-flex justify-content-between align-items-center">
+            <h2 class="mb-0">Product Listing</h2>
+            <button mat-raised-button color="accent" (click)="openProductDialog()">
+                <mat-icon class="me-2">add_circle</mat-icon> Add Product
+            </button>
+        </div>
+        <div class="card-body p-4">
+            <table mat-table [dataSource]="products" class="mat-elevation-z8 table table-hover">
+                <ng-container matColumnDef="id">
+                    <th mat-header-cell *matHeaderCellDef class="text-secondary">Product Id</th>
+                    <td mat-cell *matCellDef="let product" class="fw-bold">{{ product.id | slice:-5 }}
+
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="name">
+                    <th mat-header-cell *matHeaderCellDef class="text-secondary">Name</th>
+                    <td mat-cell *matCellDef="let product">
+                      <div *ngIf="editingProductId === product.id; else viewMode">
+                        <mat-form-field appearance="outline" class="w-50">
+                          <input matInput [formControl]="editControl" placeholder="Edit name" />
+                        </mat-form-field>
+                        <button mat-raised-button color="primary" (click)="updateProductName(product)">Update</button>
+                        <button mat-icon-button color="warn" (click)="cancelEdit()" matTooltip="Cancel">
+                          <mat-icon>close</mat-icon>
+                        </button>
+                      </div>
+                      <ng-template #viewMode>
+                        <span>{{ product.name }}</span>
+                        <button mat-icon-button color="accent" (click)="enableEdit(product)" matTooltip="Edit Name">
+                          <mat-icon>edit</mat-icon>
+                        </button>
+                      </ng-template>
+          
+                    </td>
+                  </ng-container>
+                <ng-container matColumnDef="actions">
+                    <th mat-header-cell *matHeaderCellDef class="text-secondary">Actions</th>
+                    <td mat-cell *matCellDef="let product" class="d-flex gap-2">
+                        <button mat-icon-button color="primary" (click)="openViewDialog(product)"
+                            matTooltip="View Details">
+                            <mat-icon>visibility</mat-icon>
+                        </button>
+                        <button mat-icon-button color="primary" (click)="openProductDialog(product.id)" matTooltip="Edit Product">
+                            <mat-icon>edit</mat-icon>
+                          </button>
+                        <button mat-icon-button color="warn" (click)="deleteProduct(product.id)"
+                            matTooltip="Delete Product">
+                            <mat-icon>delete</mat-icon>
+                        </button>
+                    </td>
+                </ng-container>
+
+                <tr mat-header-row *matHeaderRowDef="displayedColumns" class="bg-light"></tr>
+                <tr mat-row *matRowDef="let row; columns: displayedColumns;" class="custom-row"></tr>
+                @if(products.length === 0){
+                <tr class="text-center">
+                    <td colspan="3">No products available. Add one!</td>
+                </tr>
+                }
+
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,57 @@
+<div class="container p-4">
+  <h2 class="mb-4">{{ isEditMode ? 'Edit Product' : 'Add Product' }}</h2>
+
+  <form [formGroup]="productForm" (ngSubmit)="onSubmit()">
+    <!-- Product Name -->
+    <mat-form-field appearance="outline" class="w-100 mb-3">
+      <mat-label>Product Name</mat-label>
+      <input matInput formControlName="name" placeholder="Enter product name" />
+      <mat-error *ngIf="productForm.get('name')?.invalid">Product Name is required</mat-error>
+    </mat-form-field>
+
+    <!-- Dynamic Fields -->
+    <div formArrayName="specifications">
+      <div
+        *ngFor="let spec of specifications.controls; let i = index"
+        [formGroupName]="i"
+        class="d-flex align-items-center gap-2 mb-3"
+      >
+        <!-- Key Field -->
+        <mat-form-field appearance="outline" class="flex-fill">
+          <mat-label>Specification Name</mat-label>
+          <input matInput formControlName="key" placeholder="Enter key" />
+          <mat-error *ngIf="spec.get('key')?.invalid">Key is required</mat-error>
+        </mat-form-field>
+
+        <!-- Value Field -->
+        <mat-form-field appearance="outline" class="flex-fill">
+          <mat-label>Specification Value</mat-label>
+          <input matInput formControlName="value" placeholder="Enter value" />
+          <mat-error *ngIf="spec.get('value')?.invalid">Value is required</mat-error>
+        </mat-form-field>
+
+        <!-- Remove Button -->
+        <button mat-icon-button color="warn" (click)="removeField(i)" type="button" matTooltip="Remove Field">
+          <mat-icon>delete</mat-icon>
+        </button>
+      </div>
+    </div>
+
+    <!-- Add Dynamic Field -->
+    <div class="d-flex gap-2 mb-4">
+      <button mat-mini-fab color="primary" (click)="addField()" type="button" matTooltip="Add Field">
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+
+    <!-- Action Buttons -->
+    <div class="d-flex justify-content-end gap-3">
+      <button mat-raised-button color="warn" (click)="onCancel()" type="button">
+        <mat-icon>close</mat-icon>Cancel
+      </button>
+      <button mat-raised-button color="primary" [disabled]="productForm.invalid" type="submit">
+        <mat-icon>save</mat-icon>{{ isEditMode ? 'Update' : 'Add' }}
+      </button>
+    </div>
+  </form>
+</div>

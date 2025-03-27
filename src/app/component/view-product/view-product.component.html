@@ -1,0 +1,29 @@
+<div class="card">
+    <div class="card-header text-white">
+      <h3>Product Details</h3>
+    </div>
+    <div class="card-body">
+      <p><strong>ID:</strong> {{ product.id }}</p>
+      <p><strong>Name:</strong> {{ product.name }}</p>
+      <h4>Specifications:</h4>
+      @if (product.data; as data) {
+        <table class="table table-bordered table-striped">
+          <tbody>
+            @for (key of objectKeys(data); track key) {
+                <tr>
+                  <td><strong>{{ key }}</strong></td>
+                  <td>{{ data[key] }}</td>
+                </tr>
+              }
+          </tbody>
+        </table>
+      } @else {
+        <p class="text-danger">No additional information available.</p>
+      }
+  
+      <button mat-raised-button color="primary" (click)="close()">
+        <mat-icon>close</mat-icon> Close
+      </button>
+    </div>
+  </div>
+  
