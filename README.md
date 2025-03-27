@@ -1,59 +1,48 @@
-# AngularCrud
+Project Overview
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.5.
+This Angular project demonstrates complete CRUD (Create, Read, Update, Delete) operations using RESTful APIs. It integrates the following features:
 
-## Development server
+Product Listing: Fetch and display a list of products.
 
-To start a local development server, run:
+Add Product: Create a new product and store its ID using BehaviorSubject.
 
-```bash
+Update Product: Update a product fully using PUT and partially using PATCH.
+
+Delete Product: Remove a product from the list.
+
+Merge Product List: Combine newly added products with the default product list.
+
+Features and Functionalities
+
+Product Listing
+
+Fetch all products using GET API.- Display products using Angular Material table.
+
+Add Product
+
+Use POST API to add a new product.-Capture the product ID from the response and store it using BehaviorSubject.-Merge the newly added product with the existing product list.
+
+Update Product
+
+Use PUT API to update the entire product.-Use PATCH API to update specific product attributes.
+
+Delete Product
+
+Use DELETE API to remove a product by ID.
+
+
+State Management with BehaviorSubject
+The newly added product IDs are stored using BehaviorSubject.
+These IDs are used to fetch the latest products and merge them with the default product list.
+
+Technologies Used
+Angular: Framework for building the front-end.
+Angular Material: UI components.
+RxJS BehaviorSubject: For managing state.
+Bootstrap: Additional styling.
+
+How to Run the Project
+
+npm install
+
 ng serve
-```
-
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
