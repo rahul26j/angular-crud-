@@ -40,6 +40,10 @@ Angular: Framework for building the front-end.
 Angular Material: UI components.
 RxJS BehaviorSubject: For managing state.
 Bootstrap: Additional styling.
+Angular CLI: 19.2.5
+Node: 20.17.0
+Package Manager: npm 10.8.2
+OS: win32 x64
 
 How to Run the Project
 
